@@ -5,12 +5,13 @@
   "author": "Ivan Font <ivan@ivanfont.com>",
   "main": "bin/server.js",
   "scripts": {
-    "start": "node .",
+    "start": "node -r @splunk/otel/instrument .",
     "dev": "nodemon ."
   },
   "license": "GPLv3",
   "dependencies": {
-    "body-parser": "^1.17.1",
+    "@splunk/otel": "^2.2.4",
+    "body-parser": "^1.20.2",
     "express": "^4.14.1",
     "jade": "^1.11.0",
     "mongodb": "^2.2.24"
