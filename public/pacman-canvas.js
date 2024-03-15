@@ -33,9 +33,11 @@ function geronimo() {
 
     /* AJAX stuff */
     function getHighscore() {
-        const span = tracer.startSpan('getHighscore', {
+        const opentelemetry = require('@opentelemetry/api');
+        const tracer = opentelemetry.trace.getTracer('canvasHighscoreListLoader');
+        const span = tracer.startSpan('canvasGetHighscore', {
             attributes: {
-                'workflow.name': 'test.module.load'
+                'workflow.name': 'canvasHighscoreListLoader'
             }
         });
         setTimeout(ajax_get,30);
