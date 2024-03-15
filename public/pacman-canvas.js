@@ -33,7 +33,9 @@ function geronimo() {
 
     /* AJAX stuff */
     function getHighscore() {
+        const span = tracer.startSpan('getHighscore');
         setTimeout(ajax_get,30);
+        span.end();
     }
 
     function ajax_get() {
