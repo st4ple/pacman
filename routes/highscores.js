@@ -1,4 +1,5 @@
-import {trace} from '@opentelemetry/api'
+const opentelemetry = require('@opentelemetry/api');
+const tracer = opentelemetry.trace.getTracer('highscoreListLoader');
 
 var express = require('express');
 var router = express.Router();
@@ -15,7 +16,6 @@ router.use(function timeLog (req, res, next) {
 })
 
 router.get('/list', urlencodedParser, function(req, res, next) {
-    const tracer = trace.getTracer('highscoreListLoader');
     const span = tracer.startSpan('highscore.list.load', {
 	attributes: {
 	'workflow.name': 'highscore.list.load'
