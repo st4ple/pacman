@@ -1,7 +1,7 @@
 'use strict';
 
 const opentelemetry = require('@opentelemetry/api');
-const tracer = opentelemetry.trace.getTracer('my-tracer');
+const tracer = opentelemetry.trace.getTracer('pacman-tracer');
 
 var express = require('express');
 var path = require('path');
