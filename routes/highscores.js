@@ -3,6 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var Database = require('../lib/database');
 
+import {trace} from '@opentelemetry/api'
+
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 
@@ -13,6 +15,12 @@ router.use(function timeLog (req, res, next) {
 })
 
 router.get('/list', urlencodedParser, function(req, res, next) {
+    const tracer = trace.getTracer('highscoreListLoader');
+    const span = tracer.startSpan('highscore.list.load', {
+	attributes: {
+	'workflow.name': 'highscore.list.load'
+	}
+    });
     console.log('[GET /highscores/list]');
     Database.getDb(req.app, function(err, db) {
         if (err) {
@@ -38,6 +46,7 @@ router.get('/list', urlencodedParser, function(req, res, next) {
             res.json(result);
         });
     });
+    span.end();
 });
 
 // Accessed at /highscores
