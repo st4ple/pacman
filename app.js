@@ -52,13 +52,24 @@ app.use(function(err, req, res, next) {
 
 Database.connect(app, function(err) {
     const span = tracer.startSpan('initConnect',{ 'kind':opentelemetry.SpanKind.CLIENT});
+    const span = tracer.startSpan('test.module.load', { attributes: {
+            'workflow.name': 'test.module.load',
+            'error': 'true'
+        }
+    });
     span.setAttribute('db.system','mongodb');
     span.setAttribute('db.name','pacmandb');
     if (err) {
+        const RUMspan = tracer.startSpan('test.module.load', { attributes: {
+                'workflow.name': 'test.module.load',
+                'error': 'true'
+            }
+        });
         console.log('Failed to connect to database server');
         span.setAttribute('otel.status_code','error');
         span.setAttribute('error',true);
         span.setAttribute('sf_error',true);
+        RUMspan.end();
     } else {
         console.log('Connected to database server successfully');
         span.setAttribute('status','success');
