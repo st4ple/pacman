@@ -20,6 +20,7 @@ router.get('/list', urlencodedParser, function(req, res, next) {
 	attributes: {
 	'workflow.name': 'highscore.list.load'
 	}
+	 console.log("highscores.js workflow code snippet");
     });
     console.log('[GET /highscores/list]');
     Database.getDb(req.app, function(err, db) {
