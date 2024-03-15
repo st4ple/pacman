@@ -52,10 +52,10 @@ app.use(function(err, req, res, next) {
 
 Database.connect(app, function(err) {
     const span = tracer.startSpan('initConnect',{ 'kind':opentelemetry.SpanKind.CLIENT});
+    const rumspan = tracer.startSpan('test.module.load');
     span.setAttribute('db.system','mongodb');
     span.setAttribute('db.name','pacmandb');
     if (err) {
-        const rumspan = tracer.startSpan('test.module.load');
         rumspan.setAttribute('workflow.name','test.module.load');
         rumspan.setAttribute('error','true');
         console.log('app.js workflow code snippet');
