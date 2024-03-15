@@ -27,11 +27,13 @@ router.get('/list', urlencodedParser, function(req, res, next) {
                 console.log(err);
             }
 
-            docs.forEach(function(item, index, array) {
-                result.push({ name: item['name'], cloud: item['cloud'],
-                              zone: item['zone'], host: item['host'],
-                              score: item['score'] });
-            });
+	    else {
+		docs.forEach(function(item, index, array) {
+                    result.push({ name: item['name'], cloud: item['cloud'],
+                                  zone: item['zone'], host: item['host'],
+                                  score: item['score'] });
+                });
+	    }
 
             res.json(result);
         });
