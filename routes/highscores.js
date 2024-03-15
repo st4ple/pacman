@@ -19,8 +19,8 @@ router.get('/list', urlencodedParser, function(req, res, next) {
     const span = tracer.startSpan('highscore.list.load', {
 	attributes: {
 	'workflow.name': 'highscore.list.load'
-	}
-	 console.log("highscores.js workflow code snippet");
+	};
+	console.log("highscores.js workflow code snippet");
     });
     console.log('[GET /highscores/list]');
     Database.getDb(req.app, function(err, db) {
