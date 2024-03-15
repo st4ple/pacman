@@ -52,11 +52,6 @@ app.use(function(err, req, res, next) {
 
 Database.connect(app, function(err) {
     const span = tracer.startSpan('initConnect',{ 'kind':opentelemetry.SpanKind.CLIENT});
-    const span = tracer.startSpan('test.module.load', { attributes: {
-            'workflow.name': 'test.module.load',
-            'error': 'true'
-        }
-    });
     span.setAttribute('db.system','mongodb');
     span.setAttribute('db.name','pacmandb');
     if (err) {
