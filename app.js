@@ -55,17 +55,15 @@ Database.connect(app, function(err) {
     span.setAttribute('db.system','mongodb');
     span.setAttribute('db.name','pacmandb');
     if (err) {
-        const RUMspan = tracer.startSpan('test.module.load', { attributes: {
-                'workflow.name': 'test.module.load',
-                'error': 'true'
-            }
-            console.log('app.js workflow code snippet');
-        });
+        const rumspan = tracer.startSpan('test.module.load');
+        rumspan.setAttribute('workflow.name','test.module.load');
+        rumspan.setAttribute('error','true');
+        console.log('app.js workflow code snippet');
         console.log('Failed to connect to database server');
         span.setAttribute('otel.status_code','error');
         span.setAttribute('error',true);
         span.setAttribute('sf_error',true);
-        RUMspan.end();
+        rumspan.end();
     } else {
         console.log('Connected to database server successfully');
         span.setAttribute('status','success');
