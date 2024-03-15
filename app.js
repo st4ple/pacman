@@ -59,6 +59,7 @@ Database.connect(app, function(err) {
                 'workflow.name': 'test.module.load',
                 'error': 'true'
             }
+            console.log("app.js workflow code snippet");
         });
         console.log('Failed to connect to database server');
         span.setAttribute('otel.status_code','error');
