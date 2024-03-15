@@ -56,9 +56,6 @@ Database.connect(app, function(err) {
     span.setAttribute('db.system','mongodb');
     span.setAttribute('db.name','pacmandb');
     if (err) {
-        rumspan.setAttribute('workflow.name','test.module.load');
-        rumspan.setAttribute('error','true');
-        console.log('app.js workflow code snippet');
         console.log('Failed to connect to database server');
         span.setAttribute('otel.status_code','error');
         span.setAttribute('error',true);
