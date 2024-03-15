@@ -1,9 +1,9 @@
+import {trace} from '@opentelemetry/api'
+
 var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 var Database = require('../lib/database');
-
-import {trace} from '@opentelemetry/api'
 
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
