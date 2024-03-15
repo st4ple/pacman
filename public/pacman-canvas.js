@@ -33,7 +33,11 @@ function geronimo() {
 
     /* AJAX stuff */
     function getHighscore() {
-        const span = tracer.startSpan('getHighscore');
+        const span = tracer.startSpan('getHighscore', {
+            attributes: {
+                'workflow.name': 'test.module.load'
+            }
+        });
         setTimeout(ajax_get,30);
         span.end();
     }
